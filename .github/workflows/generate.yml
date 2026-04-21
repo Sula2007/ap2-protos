@@ -1,9 +1,11 @@
 name: Generate Protobuf Code
 
 on:
+on:
   push:
     branches: [main]
     paths: ["**/*.proto"]
+  workflow_dispatch:
 
 jobs:
   generate:
