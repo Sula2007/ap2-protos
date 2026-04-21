@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package payment;
+
+option go_package = "github.com/Sula2007/ap2-generated/payment";
+
+import "google/protobuf/timestamp.proto";
+
+service PaymentService {
+  rpc ProcessPayment(PaymentRequest) returns (PaymentResponse);
+  rpc ListPayments(ListPaymentsRequest) returns (ListPaymentsResponse);
+}
+
+message ListPaymentsRequest {
+  int64 min_amount = 1;
+  int64 max_amount = 2;
+}
+
+message ListPaymentsResponse {
+  repeated PaymentResponse payments = 1;
+}
+
+message PaymentRequest {
+  string order_id = 1;
+  int64  amount   = 2;
+}
+
+message PaymentResponse {
+  string                    transaction_id = 1;
+  string                    status         = 2;
+  google.protobuf.Timestamp processed_at   = 3;
+}
